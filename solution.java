@@ -1,17 +1,20 @@
+import java.util.*;
+
 class Solution {
+    public int solution(int[] A) {
+        int result = 0;
 
-	public int[] solution(int[] arr, int k) {
-		int[] newArr = new int[arr.length];
+        Arrays.sort(A);
 
-		if (arr.length == 0){
-			return arr;
-		}
-		k = k%arr.length;
-		
-		for (int i=0; i<arr.length; i++) {
-			newArr[i] = arr[(i + (arr.length - k)) % (arr.length)];
-		}
-
-		return newArr;
-	}
+        for(int i=0;i<A.length;i+=2){
+            if(i+1 == A.length){
+                result = A[i];
+            }else if(A[i] != A[i+1]){
+                result = A[i];
+                break;
+            }
+        }
+        
+        return result;
+    }
 }
