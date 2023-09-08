@@ -1,21 +1,27 @@
-function solution(A) {
-    let set = new Set();
-    let max = 1;
-    let min = 1;
-    let n = A.length
-
-    for (let i = 0; i < n; i += 1) {
-        let num = A[i];
-        if (num > max) {
-            max = num;
-        } else if (num < min) {
-            min = num;
+function solution(N, A) {
+    var j;
+    var i;
+    var len = A.length;
+    var lastMax = 0;
+    var max = 0; 
+    var counters = new Array (N);
+    for(j = 0; j < N; j++) counters[j] = 0;
+    var n1 = N + 1;
+    
+    for(j=0; j < len; j++){
+        if(A[j] < n1){
+            i = A[j] - 1;
+            if (counters[i] < lastMax) counters[i] = lastMax;
+            counters[i]++;
+            if (max < counters[i]) max = counters[i];
+        } else {
+            lastMax = max;
         }
-        set.add(num)
     }
     
-    let m = set.size
-    let range = (max - min) + 1
-
-    return n === m && range === m ? 1 : 0 
+    for(j = 0; j < N; j++){
+      if (counters[j] < lastMax) counters[j] = lastMax;
+    }
+    
+    return counters;
 }
