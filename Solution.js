@@ -1,27 +1,14 @@
-function solution(N, A) {
-    var j;
-    var i;
-    var len = A.length;
-    var lastMax = 0;
-    var max = 0; 
-    var counters = new Array (N);
-    for(j = 0; j < N; j++) counters[j] = 0;
-    var n1 = N + 1;
-    
-    for(j=0; j < len; j++){
-        if(A[j] < n1){
-            i = A[j] - 1;
-            if (counters[i] < lastMax) counters[i] = lastMax;
-            counters[i]++;
-            if (max < counters[i]) max = counters[i];
-        } else {
-            lastMax = max;
+function solution(A) {
+    A = A.filter(x => x >= 1).sort((a, b) => a - b)
+
+    let x = 1
+
+    for(let i = 0; i < A.length; i++) {
+        if(x < A[i]) {
+            return x
         }
+        x = A[i] + 1
     }
-    
-    for(j = 0; j < N; j++){
-      if (counters[j] < lastMax) counters[j] = lastMax;
-    }
-    
-    return counters;
+
+    return x
 }
