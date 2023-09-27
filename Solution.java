@@ -1,16 +1,13 @@
-import java.util.Arrays;
 class Solution {
     public int solution(int[] A) {
-         Arrays.sort(A);  
-         if (A.length<3) {
-            return 0;    
-         }
-         for (int i=0;i<A.length-2;i++) {
-            if (A[i]>A[i+2]-A[i+1]){  
-                return 1;
-            }         
-         }
-         
-         return 0;
+        int sum = 0;
+        for(int i = 0; i < A.length; i++){
+            for(int j = i+1; j < A.length; j++){
+                if(i+A[i] >= j-A[j]){
+                    sum += 1;
+                }
+            }
+        }
+        return sum;
     }
 }
