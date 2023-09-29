@@ -1,25 +1,15 @@
 # CodilityCodingTest
-We draw N discs on a plane. The discs are numbered from 0 to N − 1. An array A of N non-negative integers, specifying the radiuses of the discs, is given. The J-th disc is drawn with its center at (J, 0) and radius A[J].
+A string S consisting of N characters is considered to be properly nested if any of the following conditions is true:
 
-We say that the J-th disc and K-th disc intersect if J ≠ K and the J-th and K-th discs have at least one common point (assuming that the discs contain their borders).
+S is empty;
+S has the form "(U)" or "[U]" or "{U}" where U is a properly nested string;
+S has the form "VW" where V and W are properly nested strings.
+For example, the string "{[()()]}" is properly nested but "([)()]" is not.
 
-The figure below shows discs drawn for N = 6 and A as follows:
-
-  A[0] = 1
-  A[1] = 5
-  A[2] = 2
-  A[3] = 1
-  A[4] = 4
-  A[5] = 0
-
-  There are eleven (unordered) pairs of discs that intersect, namely:
-
-discs 1 and 4 intersect, and both intersect with all the other discs;
-disc 2 also intersects with discs 0 and 3.
 Write a function:
 
-class Solution { public int solution(int[] A); }
+class Solution { public int solution(String S); }
 
-that, given an array A describing N discs as explained above, returns the number of (unordered) pairs of intersecting discs. The function should return −1 if the number of intersecting pairs exceeds 10,000,000.
+that, given a string S consisting of N characters, returns 1 if S is properly nested and 0 otherwise.
 
-Given array A shown above, the function should return 11, as explained above.
+For example, given S = "{[()()]}", the function should return 1 and given S = "([)()]", the function should return 0, as explained above.

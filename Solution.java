@@ -1,30 +1,53 @@
-import java.util.*;
+import java.util.Stack;
 
 class Solution {
-    public int solution(int[] A) {
-        long[] lKth = new long[A.length];
-        long[] rJth = new long[A.length];
-        
-        for (int i = 0; i < A.length; i++) {
-            lKth[i] = (long) i - A[i];
-            rJth[i] = (long) i + A[i];
+   public int solution(String s) {
+
+        if (s.length() % 2 != 0) {
+            return 0;
         }
-        
-        Arrays.sort(lKth);
-        Arrays.sort(rJth);
-        
-        int cnt = 0;
-        int j = 0;
-        for (int i = 0; i < A.length - 1; i++) {
-            while (j < A.length && rJth[i] >= lKth[j]) {
-                cnt += j - i;
-                j++;
-                
-                if (cnt > 10000000)
-                    return -1;
-            }
+
+        Character openingBrace = new Character('{');
+        Character openingBracket = new Character('[');
+        Character openingParen = new Character('(');
+        Stack<Character> openingStack = new Stack<Character>();
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == openingBrace || c == openingBracket || c == openingParen) {
+                openingStack.push(c);
+            } else  {
+                if (i == s.length()-1 && openingStack.size() != 1) {
+                    return 0;
+                }
+                if (openingStack.isEmpty()) {
+                    return 0;
+                }
+                Character openingCharacter = openingStack.pop();
+                switch (c) {
+                case '}':
+                    if (!openingCharacter.equals(openingBrace)) {
+                        return 0;
+                    }
+                    break;
+                case ']':
+                    if (!openingCharacter.equals(openingBracket)) {
+                        return 0;
+                    }
+                    break;
+                case ')':
+                    if (!openingCharacter.equals(openingParen)) {
+                        return 0;
+                    }
+                    break;
+
+                default:
+                    break;
+                }
+            } 
         }
-        
-        return cnt;
+
+        return 1;
+
     }
 }
