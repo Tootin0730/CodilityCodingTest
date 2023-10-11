@@ -1,16 +1,16 @@
-function solution(A) {
-    length = A.length
-    if (A > 400000) return 0
-    let lastStart = A[0]
-    let lastMax = A[0]
-    let diff = 0
-    for (i=0; i < length; i++){
-        if (A[i] < lastMax) lastMax = A[i]
-        if (A[i] < lastStart) lastStart = A[i]
-        if (A[i] > lastMax) {
-            lastMax = A[i]
-            if (lastMax - lastStart > diff) diff = lastMax - lastStart
+class Solution {
+    public int solution(int[] A) {
+        int max = 0;
+
+        for (int i = 0; i < A.length; i++){
+            for(int j = i+1; j < A.length; j++){
+                if (A[j] > A[i]){
+                    if(max < A[j] - A[i]){
+                        max = A[j] - A[i];
+                    }
+                }
+            }
         }
+        return max;
     }
-    return diff > 0 ? diff : 0
 }
