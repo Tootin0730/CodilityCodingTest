@@ -1,17 +1,26 @@
-import java.lang.Math;
+import java.lang.Math.*;
 
 class Solution {
     public int solution(int[] A) {
+        int big = 0;
+        int next = 0;
 
-        int result = A[0];
-        int previous = A[0];
-        int len = A.length;
+        for (int i = 0; i < A.length-2; i++){
+            for (int j = i; j < A.length-1; j++){
+                for (int k = j; k < A.length; k++){
 
-        for (int i = 1; i < len; i++) {
-            previous = Math.max(A[i], A[i] + previous);
-            result = Math.max(result, previous);
+                    for(int bet1 = i+1; bet1 < j; bet1++){
+                        next += A[bet1];
+                    }
+
+                    for(int bet2 = j+1; bet2 < k; bet2++){
+                        next  += A[bet2];
+                    }
+                    big = Math.max(big, next);
+                    next = 0;
+                }
+            }   
         }
-        return result;
-        
+        return big;
     }
 }
