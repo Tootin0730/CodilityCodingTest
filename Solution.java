@@ -1,26 +1,15 @@
-import java.lang.Math.*;
-
 class Solution {
     public int solution(int[] A) {
-        int big = 0;
-        int next = 0;
-
-        for (int i = 0; i < A.length-2; i++){
-            for (int j = i; j < A.length-1; j++){
-                for (int k = j; k < A.length; k++){
-
-                    for(int bet1 = i+1; bet1 < j; bet1++){
-                        next += A[bet1];
-                    }
-
-                    for(int bet2 = j+1; bet2 < k; bet2++){
-                        next  += A[bet2];
-                    }
-                    big = Math.max(big, next);
-                    next = 0;
-                }
-            }   
+        int n = A.length;
+        int[] maxSumStart = new int[n];
+        int[] maxSumEnd = new int[n];
+        for (int i = 1, j = n-2; i < n-1; i++, j--) {
+            maxSumEnd[i] = Math.max(0, maxSumEnd[i-1] + A[i]);
+            maxSumStart[j] = Math.max(0, maxSumStart[j+1] + A[j]);
         }
-        return big;
+        int maxSum = Integer.MIN_VALUE;
+        for (int i = 1; i < n-1; i++)
+            maxSum = Math.max(maxSum, maxSumEnd[i-1] + maxSumStart[i+1]);
+        return maxSum;
     }
 }
