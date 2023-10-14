@@ -1,14 +1,15 @@
 class Solution {
     public int solution(int N) {
+        int result = 0;
+        for (int i=1; i<=(double)Math.sqrt(N); i++) {
+            if(i==(double)Math.sqrt(N)) {
+                result++;
+            }else if(N % i == 0) {
+                result = result + 2;
+            }   
 
-        int sum = 0;
-
-        for(int i = 1; i < N+1; i++){
-            if(N % i == 0){
-                sum += 1;
-            }
         }
-
-        return sum;
+        
+        return result;
     }
 }
