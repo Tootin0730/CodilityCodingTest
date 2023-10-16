@@ -1,15 +1,13 @@
 class Solution {
     public int solution(int N) {
-        int result = 0;
-        for (int i=1; i<=(double)Math.sqrt(N); i++) {
-            if(i==(double)Math.sqrt(N)) {
-                result++;
-            }else if(N % i == 0) {
-                result = result + 2;
-            }   
-
+        int min = N;
+        for(int a = 1; a < N+1; a++){
+            int b = N/a;
+            int perimeter = 2 * (a + b);
+            if (min > perimeter){
+                min = perimeter;
+            }
         }
-        
-        return result;
+        return min;
     }
 }
