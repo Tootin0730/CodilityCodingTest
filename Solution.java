@@ -1,25 +1,44 @@
+import java.util.Arrays;
+import java.lang.Integer;
+import java.util.ArrayList;
+import java.util.List;
+
 class Solution {
     public int solution(int[] A) {
-
-        int peakNum = 0;
-        int peakLocation [] = new int[A.length];
-
-        for(int i = 1; i < A.length-1; i++){
-            if (A[i] > A[i-1] && A[i] > A[i+1]){
-                peakLocation[peakNum] = i;
-                peakNum += 1;
-            }
-        }
-
-        int n = 0;
-        int last = 0;
-
-        for ( n = 1 ; n < peakLocation.length-1; n++){
-            if(peakLocation[n] != peakLocation[n+1] && peakLocation[n] != peakLocation[n-1]){
-                last += 1;
-            }
-        }
-
-        return last;
-    }
+        ArrayList<Integer> array = new ArrayList<Integer>();  
+		for (int i = 1; i < A.length - 1; i++) {  
+			if (A[i - 1] < A[i] && A[i + 1] < A[i]) {  
+				array.add(i);  
+			}  
+		}  
+	    if (array.size() == 1 || array.size() == 0) {  
+			return array.size();  
+	    }  
+        int sf = 1;  
+        int ef = array.size();  
+        int result = 1;  
+        while (sf <= ef) {  
+            int flag = (sf + ef) / 2;  
+            boolean suc = false;  
+            int used = 0;  
+            int mark = array.get(0);  
+            for (int i = 0; i < array.size(); i++) {  
+                if (array.get(i) >= mark) {  
+                    used++;  
+                    mark = array.get(i) + flag;  
+					if (used == flag) {                       
+						suc = true;  
+						break;  
+					}  
+                }  
+            }  
+            if (suc) {  
+                result = flag;  
+                sf = flag + 1;  
+            }else {  
+                ef = flag - 1;  
+            }  
+        }  
+       return result;  
+     }
 }
