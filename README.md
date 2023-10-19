@@ -1,54 +1,36 @@
 # CodilityCodingTest
 
-A non-empty array A consisting of N integers is given.
+You are given an array A consisting of N integers.
 
-A peak is an array element which is larger than its neighbours. More precisely, it is an index P such that 0 < P < N − 1 and A[P − 1] < A[P] > A[P + 1].
+For each number A[i] such that 0 ≤ i < N, we want to count the number of elements of the array that are not the divisors of A[i]. We say that these elements are non-divisors.
 
-For example, the following array A:
+For example, consider integer N = 5 and array A such that:
 
-    A[0] = 1
-    A[1] = 5
-    A[2] = 3
-    A[3] = 4
-    A[4] = 3
-    A[5] = 4
-    A[6] = 1
-    A[7] = 2
-    A[8] = 3
-    A[9] = 4
-    A[10] = 6
-    A[11] = 2
-has exactly four peaks: elements 1, 3, 5 and 10.
+    A[0] = 3
+    A[1] = 1
+    A[2] = 2
+    A[3] = 3
+    A[4] = 6
+For the following elements:
 
-You are going on a trip to a range of mountains whose relative heights are represented by array A, as shown in a figure below. You have to choose how many flags you should take with you. The goal is to set the maximum number of flags on the peaks, according to certain rules.
-
-Flags can only be set on peaks. What's more, if you take K flags, then the distance between any two flags should be greater than or equal to K. The distance between indices P and Q is the absolute value |P − Q|.
-
-For example, given the mountain range represented by array A, above, with N = 12, if you take:
-
-two flags, you can set them on peaks 1 and 5;
-three flags, you can set them on peaks 1, 5 and 10;
-four flags, you can set only three flags, on peaks 1, 5 and 10.
-You can therefore set a maximum of three flags in this case.
-
+A[0] = 3, the non-divisors are: 2, 6,
+A[1] = 1, the non-divisors are: 3, 2, 3, 6,
+A[2] = 2, the non-divisors are: 3, 3, 6,
+A[3] = 3, the non-divisors are: 2, 6,
+A[4] = 6, there aren't any non-divisors.
 Write a function:
 
-class Solution { public int solution(int[] A); }
+class Solution { public int[] solution(int[] A); }
 
-that, given a non-empty array A of N integers, returns the maximum number of flags that can be set on the peaks of the array.
+that, given an array A consisting of N integers, returns a sequence of integers representing the amount of non-divisors.
 
-For example, the following array A:
+Result array should be returned as an array of integers.
 
-    A[0] = 1
-    A[1] = 5
-    A[2] = 3
-    A[3] = 4
-    A[4] = 3
-    A[5] = 4
-    A[6] = 1
-    A[7] = 2
-    A[8] = 3
-    A[9] = 4
-    A[10] = 6
-    A[11] = 2
-the function should return 3, as explained above.
+For example, given:
+
+    A[0] = 3
+    A[1] = 1
+    A[2] = 2
+    A[3] = 3
+    A[4] = 6
+the function should return [2, 4, 3, 2, 0], as explained above.
