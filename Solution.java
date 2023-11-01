@@ -1,16 +1,35 @@
 class Solution {
-    public int[] solution(int[] A, int[] B) {
-        int L = A.length;
-        int[] fib = new int[L+2];
-        int[] result = new int[L];
-        fib[1] = 1;
-        fib[2] = 2;
-        for (int i = 3; i <= L; i++) {
-            fib[i] = (fib[i-1] + fib[i-2]) % (1 << 30);
+    public int solution(int K, int M, int[] A) {
+        int min = 0;
+        int max = 0;
+        for (int i = 0; i < A.length; i++) {
+            max += A[i];
+            min = Math.max(min, A[i]);
         }
-        for (int i = 0; i < L; i++) {
-            result[i] = fib[A[i]] % (1 << B[i]);
+        int result = max;
+        while (min <= max) {
+            int mid = (min + max) / 2;
+            if (divisionSolvable(mid, K - 1, A)) {
+                max = mid - 1;
+                result = mid;
+            } else {
+                min = mid + 1;
+            }
         }
         return result;
+    }
+    private boolean divisionSolvable(int mid, int k, int[] a) {
+        int sum = 0;
+        for (int i = 0; i < a.length; i++) {
+            sum += a[i];
+            if (sum > mid) {
+                sum = a[i];
+                k--;
+            }
+            if (k < 0) {
+                return false;
+            }
+        }
+        return true;
     }
 }

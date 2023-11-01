@@ -1,42 +1,43 @@
 # CodilityCodingTest
 
-You have to climb up a ladder. The ladder has exactly N rungs, numbered from 1 to N. With each step, you can ascend by one or two rungs. More precisely:
+You are given integers K, M and a non-empty array A consisting of N integers. Every element of the array is not greater than M.
 
-with your first step you can stand on rung 1 or 2,
-if you are on rung K, you can move to rungs K + 1 or K + 2,
-finally you have to stand on rung N.
-Your task is to count the number of different ways of climbing to the top of the ladder.
+You should divide this array into K blocks of consecutive elements. The size of the block is any integer between 0 and N. Every element of the array should belong to some block.
 
-For example, given N = 4, you have five different ways of climbing, ascending by:
+The sum of the block from X to Y equals A[X] + A[X + 1] + ... + A[Y]. The sum of empty block equals 0.
 
-1, 1, 1 and 1 rung,
-1, 1 and 2 rungs,
-1, 2 and 1 rung,
-2, 1 and 1 rungs, and
-2 and 2 rungs.
-Given N = 5, you have eight different ways of climbing, ascending by:
+The large sum is the maximal sum of any block.
 
-1, 1, 1, 1 and 1 rung,
-1, 1, 1 and 2 rungs,
-1, 1, 2 and 1 rung,
-1, 2, 1 and 1 rung,
-1, 2 and 2 rungs,
-2, 1, 1 and 1 rungs,
-2, 1 and 2 rungs, and
-2, 2 and 1 rung.
-The number of different ways can be very large, so it is sufficient to return the result modulo 2P, for a given integer P.
+For example, you are given integers K = 3, M = 5 and array A such that:
+
+  A[0] = 2
+  A[1] = 1
+  A[2] = 5
+  A[3] = 1
+  A[4] = 2
+  A[5] = 2
+  A[6] = 2
+The array can be divided, for example, into the following blocks:
+
+[2, 1, 5, 1, 2, 2, 2], [], [] with a large sum of 15;
+[2], [1, 5, 1, 2], [2, 2] with a large sum of 9;
+[2, 1, 5], [], [1, 2, 2, 2] with a large sum of 8;
+[2, 1], [5, 1], [2, 2, 2] with a large sum of 6.
+The goal is to minimize the large sum. In the above example, 6 is the minimal large sum.
 
 Write a function:
 
-class Solution { public int[] solution(int[] A, int[] B); }
+def solution(K, M, A)
 
-that, given two non-empty arrays A and B of L integers, returns an array consisting of L integers specifying the consecutive answers; position I should contain the number of different ways of climbing the ladder with A[I] rungs modulo 2B[I].
+that, given integers K, M and a non-empty array A consisting of N integers, returns the minimal large sum.
 
-For example, given L = 5 and:
+For example, given K = 3, M = 5 and array A such that:
 
-    A[0] = 4   B[0] = 3
-    A[1] = 4   B[1] = 2
-    A[2] = 5   B[2] = 4
-    A[3] = 5   B[3] = 3
-    A[4] = 1   B[4] = 1
-the function should return the sequence [5, 1, 8, 0, 1], as explained above.
+  A[0] = 2
+  A[1] = 1
+  A[2] = 5
+  A[3] = 1
+  A[4] = 2
+  A[5] = 2
+  A[6] = 2
+the function should return 6, as explained above.
