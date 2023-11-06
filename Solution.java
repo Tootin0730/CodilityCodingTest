@@ -1,19 +1,20 @@
 class Solution {
-    public int solution(int[] A) {
-        int sum = 0;
-        int check = 0;
-        int minus = 0;
+    public int solution(int[] A, int[] B, int[] C) {
+        int add = 0;
+        int result = 0;
 
-        for(int i = 0; i < A.length; i++){
-            check = 0-A[i];
-            for(int j = i+1; j < A.length; j++){
-                if(A[j] == check){
-                    minus += 1;
+        for(int j = 0; j < C.length; j++){
+            for(int i = 0; i < A.length; i++){
+                if (A[i] <= C[j] && C[j] <= B[i]){
+                    add += 1;
                 }
-            } 
-            sum += 1;
+            }
+            if(add == A.length){
+                result =  add;
+            } else if (add == 0){
+                result = -1;
+            }
         }
-        sum = sum-minus;
-        return sum;
+        return result;
     }
 }
