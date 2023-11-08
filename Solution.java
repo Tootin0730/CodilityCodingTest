@@ -1,23 +1,20 @@
+import java.util.*;
+
 class Solution {
-    public int solution(int M, int[] A) {
+    public int solution(int[] A) {
         int N = A.length;
-        int[] counters = new int[M+1];
-        int head = 0;
-        int tail = 0;
+        Arrays.sort(A);
         int result = 0;
-        while (tail < N) {
-            while (head < N && counters[A[head]] != 2) {
-                counters[A[head]]++;
-                if (counters[A[head]] == 2)
-                    break;
-                head++;
+        for (int i=0; i < N; i++) {
+            int k = i + 2;
+            for (int j=i+1; j < N; j++) {
+                while(k<N && A[i]+A[j]>A[k]) {
+                    k++;    
+                }
+                result += k-j-1; 
             }
-            result += head - tail;
-            if (result > 1000000000)
-                return 1000000000;
-            counters[A[tail]] = 0;
-            tail++;
         }
         return result;
+        
     }
 }
