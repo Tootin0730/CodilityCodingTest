@@ -1,20 +1,22 @@
-import java.util.*;
+import java.util.Arrays;
 
 class Solution {
     public int solution(int[] A) {
         int N = A.length;
         Arrays.sort(A);
-        int result = 0;
-        for (int i=0; i < N; i++) {
-            int k = i + 2;
-            for (int j=i+1; j < N; j++) {
-                while(k<N && A[i]+A[j]>A[k]) {
-                    k++;    
-                }
-                result += k-j-1; 
-            }
+        int tail = 0;
+        int head = N - 1;
+        int minAbsSum = Math.abs(A[tail] + A[head]);
+        while (tail <= head) {
+            int currentSum = A[tail] + A[head];
+            minAbsSum = Math.min(minAbsSum, Math.abs(currentSum));
+            // If the sum has become
+            // positive, we should know that the head can be moved left
+            if (currentSum <= 0)
+                tail++;
+            else
+                head--;
         }
-        return result;
-        
+        return minAbsSum;
     }
 }
