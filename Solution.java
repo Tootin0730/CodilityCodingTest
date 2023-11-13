@@ -1,16 +1,21 @@
 class Solution {
-    public int solution(int[] A, int[] B) {
-
-        int count = 1;
+    public int solution(int A[], int B[]) {
+        int N = A.length;
+        if (N <= 1) {
+            return N;
+        }
+        
+        int cnt = 1;
         int prev_end = B[0];
         
-        for (int curr = 1; curr < A.length; curr++) {
+        int curr;
+        for (curr = 1; curr < N; curr++) {
             if (A[curr] > prev_end) {
-                count++;
+                cnt++;
                 prev_end = B[curr];
             }
         }
         
-        return count;
+        return cnt;
     }
 }
