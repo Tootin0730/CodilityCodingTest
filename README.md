@@ -1,39 +1,25 @@
 # CodilityCodingTest
 
-Let A be a non-empty array consisting of N integers.
+Located on a line are N segments, numbered from 0 to N − 1, whose positions are given in arrays A and B. For each I (0 ≤ I < N) the position of segment I is from A[I] to B[I] (inclusive). The segments are sorted by their ends, which means that B[K] ≤ B[K + 1] for K such that 0 ≤ K < N − 1.
 
-The abs sum of two for a pair of indices (P, Q) is the absolute value |A[P] + A[Q]|, for 0 ≤ P ≤ Q < N.
+Two segments I and J, such that I ≠ J, are overlapping if they share at least one common point. In other words, A[I] ≤ A[J] ≤ B[I] or A[J] ≤ A[I] ≤ B[J].
 
-For example, the following array A:
+We say that the set of segments is non-overlapping if it contains no two overlapping segments. The goal is to find the size of a non-overlapping set containing the maximal number of segments.
 
-  A[0] =  1
-  A[1] =  4
-  A[2] = -3
-has pairs of indices (0, 0), (0, 1), (0, 2), (1, 1), (1, 2), (2, 2).
-The abs sum of two for the pair (0, 0) is A[0] + A[0] = |1 + 1| = 2.
-The abs sum of two for the pair (0, 1) is A[0] + A[1] = |1 + 4| = 5.
-The abs sum of two for the pair (0, 2) is A[0] + A[2] = |1 + (−3)| = 2.
-The abs sum of two for the pair (1, 1) is A[1] + A[1] = |4 + 4| = 8.
-The abs sum of two for the pair (1, 2) is A[1] + A[2] = |4 + (−3)| = 1.
-The abs sum of two for the pair (2, 2) is A[2] + A[2] = |(−3) + (−3)| = 6.
+For example, consider arrays A, B such that:
+
+    A[0] = 1    B[0] = 5
+    A[1] = 3    B[1] = 6
+    A[2] = 7    B[2] = 8
+    A[3] = 9    B[3] = 9
+    A[4] = 9    B[4] = 10
+
+The size of a non-overlapping set containing a maximal number of segments is 3. For example, possible sets are {0, 2, 3}, {0, 2, 4}, {1, 2, 3} or {1, 2, 4}. There is no non-overlapping set with four segments.
+
 Write a function:
 
-class Solution { public int solution(int[] A); }
+class Solution { public int solution(int[] A, int[] B); }
 
-that, given a non-empty array A consisting of N integers, returns the minimal abs sum of two for any pair of indices in this array.
+that, given two arrays A and B consisting of N integers, returns the size of a non-overlapping set containing a maximal number of segments.
 
-For example, given the following array A:
-
-  A[0] =  1
-  A[1] =  4
-  A[2] = -3
-the function should return 1, as explained above.
-
-Given array A:
-
-  A[0] = -8
-  A[1] =  4
-  A[2] =  5
-  A[3] =-10
-  A[4] =  3
-the function should return |(−8) + 5| = 3.
+For example, given arrays A, B shown above, the function should return 3, as explained above.
