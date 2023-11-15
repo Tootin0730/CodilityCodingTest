@@ -1,42 +1,41 @@
 # CodilityCodingTest
 
-There are N ropes numbered from 0 to N − 1, whose lengths are given in an array A, lying on the floor in a line. 
-For each I (0 ≤ I < N), the length of rope I on the line is A[I].
+A game for one player is played on a board consisting of N consecutive squares, numbered from 0 to N − 1. There is a number written on each square. A non-empty array A of N integers contains the numbers written on the squares. Moreover, some squares can be marked during the game.
 
-We say that two ropes I and I + 1 are adjacent. Two adjacent ropes can be tied together with a knot, and the length of the tied rope is the sum of lengths of both ropes. The resulting new rope can then be tied again.
+At the beginning of the game, there is a pebble on square number 0 and this is the only square on the board which is marked. The goal of the game is to move the pebble to square number N − 1.
 
-For a given integer K, the goal is to tie the ropes in such a way that the number of ropes whose length is greater than or equal to K is maximal.
+During each turn we throw a six-sided die, with numbers from 1 to 6 on its faces, and consider the number K, which shows on the upper face after the die comes to rest. Then we move the pebble standing on square number I to square number I + K, providing that square number I + K exists. If square number I + K does not exist, we throw the die again until we obtain a valid move. Finally, we mark square number I + K.
 
-For example, consider K = 4 and array A such that:
+After the game finishes (when the pebble is standing on square number N − 1), we calculate the result. The result of the game is the sum of the numbers written on all marked squares.
+
+For example, given the following array:
 
     A[0] = 1
-    A[1] = 2
-    A[2] = 3
-    A[3] = 4
-    A[4] = 1
-    A[5] = 1
-    A[6] = 3
-The ropes are shown in the figure below.
+    A[1] = -2
+    A[2] = 0
+    A[3] = 9
+    A[4] = -1
+    A[5] = -2
+one possible game could be as follows:
 
-We can tie:
-
-rope 1 with rope 2 to produce a rope of length A[1] + A[2] = 5;
-rope 4 with rope 5 with rope 6 to produce a rope of length A[4] + A[5] + A[6] = 5.
-After that, there will be three ropes whose lengths are greater than or equal to K = 4. It is not possible to produce four such ropes.
+the pebble is on square number 0, which is marked;
+we throw 3; the pebble moves from square number 0 to square number 3; we mark square number 3;
+we throw 5; the pebble does not move, since there is no square number 8 on the board;
+we throw 2; the pebble moves to square number 5; we mark this square and the game ends.
+The marked squares are 0, 3 and 5, so the result of the game is 1 + 9 + (−2) = 8. This is the maximal possible result that can be achieved on this board.
 
 Write a function:
 
-class Solution { public int solution(int K, int[] A); }
+class Solution { public int solution(int[] A); }
 
-that, given an integer K and a non-empty array A of N integers, returns the maximum number of ropes of length greater than or equal to K that can be created.
+that, given a non-empty array A of N integers, returns the maximal result that can be achieved on the board represented by array A.
 
-For example, given K = 4 and array A such that:
+For example, given the array
 
     A[0] = 1
-    A[1] = 2
-    A[2] = 3
-    A[3] = 4
-    A[4] = 1
-    A[5] = 1
-    A[6] = 3
-the function should return 3, as explained above.
+    A[1] = -2
+    A[2] = 0
+    A[3] = 9
+    A[4] = -1
+    A[5] = -2
+the function should return 8, as explained above.
