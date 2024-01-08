@@ -19,4 +19,5 @@ Given N = 32 the function should return 0, because N has binary representation '
 
 
 # NOTE
-I am re-practicing codility coding test.
+I am re-practicing codility coding test to make sure I know all the key concepts.
+As soon as I finish the lessons, I will continue Exercises and Challeges.
