@@ -1,14 +1,26 @@
 class Solution {
     public int[] solution(int[] A, int K) {
-        int [] B = new int [A.length];
-
-        for(int i = 0; i < A.length; i++){
-            if(i+K <= A.length-1){
-                B[i] = A[i+K];
-            }else if(i+K > A.length-1){
-                B[i] = A[i+K-A.length];
-            }
-        }
-        return B;
+        
+        // Corner cases to save resources
+         if(K == 0 || A.length <= 0 || A.length == K){
+             return A;
+         }
+         
+         // Loop to traverse K times
+         for(int i=0; i<K; i++){
+             int last = A[A.length - 1]; // Last digit
+             
+             // Loop to traverse A.Length times in swing order,
+             // so that first element can be set
+             for(int j=A.length-1; j>0; j--){
+              A[j] = A[j-1];   
+             }
+             
+             // Set last element
+             A[0] = last;
+         }
+         
+         // Return result
+         return A;
     }
 }
