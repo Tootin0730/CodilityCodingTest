@@ -1,31 +1,14 @@
-import java.util.*;
 class Solution {
-    
-    public int solution(int N) {
-        String binary = Integer.toBinaryString(N);
-	    int count=0;          //keep count of zeros
-	    ArrayList<Integer> lengths = new ArrayList<Integer>();	//stores binary gaps
-	        for(int i = 0;i<binary.length();i++){
-	            if(binary.charAt(i)=='1' && (i+1) < binary.length() && binary.charAt(i+1)=='0' ){    //search first encounter of 1 and only if subsequent charactor is 0 start counting the 0's
-                count +=1;
-                i++;
-                while(binary.length() > (i+1) && binary.charAt(i+1) == '0' ){ //increment count if theres subsequent zeros			
-                    count+=1;
-                    i++;
-                    if((i+1) < binary.length() && binary.charAt(i+1)=='1'){ //next index within range 
-                        break;
-                    }
-                }
-                if(binary.length() > (i+1) && binary.charAt(i+1)=='1') { //add to lengths only if ending with 1 
-                    lengths.add(count);
-                    count =0;         //initializing count
-                }
+    public int[] solution(int[] A, int K) {
+        int [] B = new int [A.length];
+
+        for(int i = 0; i < A.length; i++){
+            if(i+K <= A.length-1){
+                B[i] = A[i+K];
+            }else if(i+K > A.length-1){
+                B[i] = A[i+K-A.length];
             }
-        }   
-        if(lengths.size()==0){
-            return 0;
-        }else{
-            return Collections.max(lengths); 
         }
+        return B;
     }
 }
