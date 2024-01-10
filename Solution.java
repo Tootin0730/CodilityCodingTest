@@ -1,21 +1,14 @@
+import java.util.*;
 class Solution {
     public int solution(int[] A) {
-        int N = A.length;
-        int result = 0;
-        int check = 0;
-
-        for(int i = 0; i < N; i++){
-            for(int j = 0; j < N; j++){
-                if(A[i] == A[j]){
-                    check += 1;
-                }
-            }
-            if(check == 1){
-                result = A[i];
-                break;
-            }
-            check = 0;
-        }
-        return result;
+     int i = 0;
+     Arrays.sort(A);
+     for (int temp : A) {
+         if (A[i] != A[(i+1) % A.length]) {
+             return A[i];
+         }
+         i += 2;
+     }
+     return A[A.length - 1];
     }
 }
