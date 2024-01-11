@@ -1,14 +1,13 @@
-import java.util.*;
 class Solution {
-    public int solution(int[] A) {
-     int i = 0;
-     Arrays.sort(A);
-     for (int temp : A) {
-         if (A[i] != A[(i+1) % A.length]) {
-             return A[i];
-         }
-         i += 2;
-     }
-     return A[A.length - 1];
+    public int solution(int X, int Y, int D) {
+
+        double y = (double)Y;
+        double x = (double)X;
+        double d = (double)D;
+
+        double calculate = (y-x)/d;
+        double round = Math.ceil(calculate);
+        int result = (int)round;
+        return result;
     }
 }
