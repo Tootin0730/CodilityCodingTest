@@ -1,18 +1,17 @@
 class Solution {
-    public int solution(int[] A) {
 
-        int total = 0;
-        for(int i = 0; i < A.length+1; i++){
-            total += i;
-        }
+    public final int solution(final int[] data) {
 
-        int missing = 0;
-        for(int j = 0; j < A.length; j++){
-            missing += j;
-        }
-
-        int result = total - missing;
+        final long N = data.length + 1;
+        final long total = (N * (N + 1)) / 2;
         
-        return result;
+        long sum = 0L;
+
+        for (final int i : data) {
+
+            sum += i;
+        }
+
+        return (int)(total - sum);
     }
 }
