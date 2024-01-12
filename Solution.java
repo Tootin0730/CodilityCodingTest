@@ -1,13 +1,18 @@
 class Solution {
-    public int solution(int X, int Y, int D) {
+    public int solution(int[] A) {
 
-        double y = (double)Y;
-        double x = (double)X;
-        double d = (double)D;
+        int total = 0;
+        for(int i = 0; i < A.length+1; i++){
+            total += i;
+        }
 
-        double calculate = (y-x)/d;
-        double round = Math.ceil(calculate);
-        int result = (int)round;
+        int missing = 0;
+        for(int j = 0; j < A.length; j++){
+            missing += j;
+        }
+
+        int result = total - missing;
+        
         return result;
     }
 }
