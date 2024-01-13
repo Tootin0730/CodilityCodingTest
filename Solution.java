@@ -1,22 +1,22 @@
 class Solution {
     public int solution(int[] A) {
 
-        int difference;
-        int minimum = 100000;
-        
-        for(int i = 0; i < A.length; i++){
-            int up = 0;
-            for(int j = i+1; j < A.length; j++){
-                up += A[j];
-            }
-            difference = A[i] - up;
-            if (difference < 0){
-                difference = 0 - difference;
-            }
+        int len = A.length;
+        int[] sum = new int[len];
+        sum[0] = A[0];
 
-            minimum = Math.min(minimum, difference);
+        for (int i = 1; i < len; i++) {
+                    sum[i] = sum[i-1] + A[i];
         }
-        return minimum;
+
+        int min = Math.abs(sum[len-1] -2*sum[0]);
+        for (int i = 2; i < len; i++) {
+            int temp = Math.abs(sum[len-1] -2*sum[i-1]);
+            if (temp < min)
+                min = temp;
+        }
+        
+        return min;
     }
 }
 
