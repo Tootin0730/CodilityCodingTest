@@ -1,17 +1,22 @@
 class Solution {
+    public int solution(int[] A) {
 
-    public final int solution(final int[] data) {
-
-        final long N = data.length + 1;
-        final long total = (N * (N + 1)) / 2;
+        int difference;
+        int minimum = 100000;
         
-        long sum = 0L;
+        for(int i = 0; i < A.length; i++){
+            int up = 0;
+            for(int j = i+1; j < A.length; j++){
+                up += A[j];
+            }
+            difference = A[i] - up;
+            if (difference < 0){
+                difference = 0 - difference;
+            }
 
-        for (final int i : data) {
-
-            sum += i;
+            minimum = Math.min(minimum, difference);
         }
-
-        return (int)(total - sum);
+        return minimum;
     }
 }
+
