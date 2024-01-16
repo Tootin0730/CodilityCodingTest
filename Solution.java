@@ -1,21 +1,19 @@
-import java.util.*;
-
 class Solution {
-    public int solution(int X, int[] A) {
-        
-        int time = 0;
-        
-        Set<Integer> leavesNeeded = new HashSet<Integer>();
-        
-        for(int i = 0; i < A.length; i++){
-            
-            if(A[i] <= X){
-                leavesNeeded.add(A[i]);
-            }
-            if( leavesNeeded.size() == X){
-                return i;
+    public int solution(int[] A) {
+        int result = 0;
+
+        for(int i = 1; i <= A.length; i++){
+            for (int element : A) {
+                if(element == i) {
+                    result += 1;
+                }
             }
         }
-        return -1;
+
+        if(result == A.length){
+            return 1;
+        }else{
+            return 0;
+        }
     }
 }
