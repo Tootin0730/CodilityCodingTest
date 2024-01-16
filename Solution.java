@@ -1,19 +1,14 @@
+import java.util.*;
+
 class Solution {
     public int solution(int[] A) {
-        int result = 0;
+        Arrays.sort(A);
 
-        for(int i = 1; i <= A.length; i++){
-            for (int element : A) {
-                if(element == i) {
-                    result += 1;
-                }
-            }
-        }
-
-        if(result == A.length){
-            return 1;
-        }else{
+    for(int i=0; i<A.length; i++){
+        if(A[i] != i+1){
             return 0;
         }
+    }
+    return 1;
     }
 }
