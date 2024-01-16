@@ -1,25 +1,19 @@
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 class Solution {
-
     public int solution(int X, int[] A) {
-        int list[] = A;
-        int sum = 0;
-        int searchedValue = X;
-
-        List<Integer> arrayList = new ArrayList<Integer>();
-
-        for (int i = 0; i < list.length; i++) {
-
-            if (list[i] <= searchedValue && !arrayList.contains(list[i])) {
-                sum += list[i];
-                arrayList.add(list[i]);
+        
+        int time = 0;
+        
+        Set<Integer> leavesNeeded = new HashSet<Integer>();
+        
+        for(int i = 0; i < A.length; i++){
+            
+            if(A[i] <= X){
+                leavesNeeded.add(A[i]);
             }
-            if (list[i] == searchedValue) {
-                if (sum == searchedValue * (searchedValue + 1) / 2) {
-                    return i;
-                }
+            if( leavesNeeded.size() == X){
+                return i;
             }
         }
         return -1;
