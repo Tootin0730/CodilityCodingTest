@@ -1,15 +1,42 @@
-import java.util.*;
-
 class Solution {
-    public int solution(int[] arr) {
-        Arrays.sort(arr);
+    public int solution(int[] A) {
 
-        int smallest = 1;
-        for (int i = 0; i < arr.length; i++) {
-            if (arr[i] == smallest) {
-                smallest++;
+        int result = 0;
+        int zeroPosition = 0;
+        int onePosition = 0;
+
+        for(int i = 0; i < A.length; i++){
+            if(A[i] == 0){
+                zeroPosition += 1;
+            } else if (A[i] == 1){
+                onePosition += 1;
             }
         }
-        return smallest;
+
+        int[] zero = new int[2];
+        int[] one = new int[3];
+        zeroPosition = 0;
+        onePosition = 0;
+        
+        for(int i = 0; i < A.length; i++){
+            if(A[i] == 0){
+                zero[zeroPosition] = i;
+                zeroPosition += 1;
+            } else if (A[i] == 1){
+                one[onePosition] = i;
+                onePosition += 1;
+            }
+        }
+        
+        for(int a = 0; a < zero.length; a++){
+            for (int b = 0; b < one.length; b++){
+                if(zero[a] < one[b]){
+                    result += 1;
+                }
+            }
+        }
+
+        
+        return result;
     }
 }
