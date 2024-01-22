@@ -1,6 +1,31 @@
 class Solution {
-    public int solution(int A, int B, int K) {
-        int prevCount = A>0 ? (A-1)/K : -1;
-        return B/K - prevCount;
+    public int[] solution(String S, int[] P, int[] Q) {
+        final  char c[] = S.toCharArray();
+        final int answer[] = new int[P.length];
+        int tempAnswer;
+        char tempC;
+
+        for (int iii = 0; iii < P.length; iii++) {
+            tempAnswer = 4;
+            for (int zzz = P[iii]; zzz <= Q[iii]; zzz++) {
+                tempC = c[zzz];
+                if (tempC == 'A') {
+                    tempAnswer = 1;
+                    break;
+                } else if (tempC == 'C') {
+                    if (tempAnswer > 2) {
+                        tempAnswer = 2;
+                    }
+                } else if (tempC == 'G') {
+                    if (tempAnswer > 3) {
+                        tempAnswer = 3;
+                    }
+
+                }
+            }
+            answer[iii] = tempAnswer;
+        }
+
+        return answer;
     }
 }
