@@ -1,31 +1,24 @@
 class Solution {
-    public int[] solution(String S, int[] P, int[] Q) {
-        final  char c[] = S.toCharArray();
-        final int answer[] = new int[P.length];
-        int tempAnswer;
-        char tempC;
+    public int solution(int[] A) {
 
-        for (int iii = 0; iii < P.length; iii++) {
-            tempAnswer = 4;
-            for (int zzz = P[iii]; zzz <= Q[iii]; zzz++) {
-                tempC = c[zzz];
-                if (tempC == 'A') {
-                    tempAnswer = 1;
+        int min = 100;
+        int result = 0;
+        int avg = 100;
+    
+        for(int i = 0; i < A.length; i++){
+            int sum = A[i];
+
+            for(int j = i+1; j < A.length-1; j++){
+                sum += A[j];    
+                avg = (sum) / (j-i+1);
+
+                if(avg < min){
+                    min = avg;
+                    result = i;
                     break;
-                } else if (tempC == 'C') {
-                    if (tempAnswer > 2) {
-                        tempAnswer = 2;
-                    }
-                } else if (tempC == 'G') {
-                    if (tempAnswer > 3) {
-                        tempAnswer = 3;
-                    }
-
                 }
             }
-            answer[iii] = tempAnswer;
         }
-
-        return answer;
+        return result;
     }
 }
