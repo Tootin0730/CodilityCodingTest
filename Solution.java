@@ -1,18 +1,10 @@
-class Solution{
-    public static int solution(int[] A) {
-        int total = 0;
-        int check = 0;
-        for (int i = 0; i < A.length; i++){
-            check = 0;
-            for(int j = i; j < A.length; j++){
-                if(A[i] == A[j]){
-                    check += 1;
-                }
-            }
-            if(check <= 1){
-                total += 1;
-            }
-        }
-        return total;
+import java.util.Set;
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
+class Solution {
+    public int solution(int[] A) {
+        Set<Integer> set = Arrays.stream(A).boxed().collect(Collectors.toSet());
+        return set.size();
     }
 }
