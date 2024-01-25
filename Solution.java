@@ -1,10 +1,9 @@
-import java.util.Set;
 import java.util.Arrays;
-import java.util.stream.Collectors;
 
 class Solution {
     public int solution(int[] A) {
-        Set<Integer> set = Arrays.stream(A).boxed().collect(Collectors.toSet());
-        return set.size();
+        Arrays.sort(A);
+        int n = A.length - 1;
+        return Math.max(A[n-2] * A[n-1] * A[n], A[0] * A[1] * A[n]);
     }
 }
