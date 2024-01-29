@@ -1,43 +1,27 @@
+import java.util.Stack;
+
 class Solution {
     public int solution(String S) {
-        
-        int check1 = 0;
-        int check2 = 0;
-        int check3 = 0;
-        int s = S.length();
-        for(int i = 0; i < s; i++){
-            if(S.charAt(i) == '('){
-                check1 += 1;
-            } else if(S.charAt(i) == ')') {
-                check1 -= 1;
-            } else if(S.charAt(i) == '{') {
-                check2 += 1;
-            } else if(S.charAt(i) == '}') {
-                check2 -= 1;
-            } else if(S.charAt(i) == '[') {
-                check3 += 1;
-            } else if(S.charAt(i) == ']') {
-                check3 -= 1;
-            }
-        }
-
-        int check4 = 0;
-        for(int j = 0; j < s; j++){
-            if(S.charAt(j) == '('){
-                check4 += 1;
-                if(S.charAt(j+1) == ')'){
-                    check4 -= 1;
+        Stack<Character> stack = new Stack<>();
+        int n = S.length(), i;
+        char c1, c2;
+        for (i = 0; i < n; i++) {
+            c1 = S.charAt(i);
+            if (c1 == '(' || c1 == '[' || c1 == '{')
+                stack.push(c1);
+            else {
+                if (stack.isEmpty())
+                    return 0;
+                c2 = stack.pop();
+                switch (c2) {
+                    case '(': c2 = ')'; break;
+                    case '[': c2 = ']'; break;
+                    case '{': c2 = '}';
                 }
+                if (c1 != c2)
+                    return 0;
             }
         }
-
-        if(check1 == 0 && check2 == 0 && check3 == 0 && check4 == 0){
-            return 1;
-        }else{
-            return 0;
-        }
-
-
-
+        return (stack.isEmpty()) ? 1 : 0;
     }
 }
