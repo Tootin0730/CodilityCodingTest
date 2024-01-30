@@ -1,27 +1,40 @@
-import java.util.Stack;
+import java.util.*;
 
 class Solution {
-    public int solution(String S) {
-        Stack<Character> stack = new Stack<>();
-        int n = S.length(), i;
-        char c1, c2;
-        for (i = 0; i < n; i++) {
-            c1 = S.charAt(i);
-            if (c1 == '(' || c1 == '[' || c1 == '{')
-                stack.push(c1);
-            else {
-                if (stack.isEmpty())
-                    return 0;
-                c2 = stack.pop();
-                switch (c2) {
-                    case '(': c2 = ')'; break;
-                    case '[': c2 = ']'; break;
-                    case '{': c2 = '}';
+    public int solution(int[] A, int[] B) {
+
+        int numFishes = A.length;
+
+        // no fishes
+        if(numFishes == 0)
+            return 0;
+
+        // Deque stores the fishes swimming downstreams (B[i]==1) 
+        Deque<Integer> downstreams = new ArrayDeque<Integer>();
+
+        for(int i = 0; i < A.length; i++){
+
+            //Fish is going downstreams
+            if(B[i] == 1){
+                // push the fish into the Deque
+                downstreams.push(A[i]); 
+            }//Fish is going upstreams
+            else{
+                while( !downstreams.isEmpty() ){ 
+                    // Downstream-fish is bigger 
+                    if( downstreams.peek() > A[i] ){
+                        //Upstream-fish gets eaten
+                        numFishes--;
+                        break;    
+                    }// Downstream-fish is smaller
+                    else if(downstreams.peek() < A[i]){
+                        //Downstream-fish gets eaten
+                        numFishes--;
+                        downstreams.pop();
+                    }
                 }
-                if (c1 != c2)
-                    return 0;
-            }
-        }
-        return (stack.isEmpty()) ? 1 : 0;
+            }  
+        }    
+        return numFishes;
     }
 }
