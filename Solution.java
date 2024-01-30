@@ -1,40 +1,27 @@
-import java.util.*;
-
 class Solution {
-    public int solution(int[] A, int[] B) {
+    public int solution(String S) {
+        int len = S.length();
+        int open = 0;
+        int end = 0;
+        int result = 0;
 
-        int numFishes = A.length;
+        if(len == 0){
+            result = 0;
+        }
 
-        // no fishes
-        if(numFishes == 0)
-            return 0;
+        for(int i = 0; i < len; i++){
+            if(S.charAt(i) == '('){
+                open += 1;
+            }else if (S.charAt(i) == ')'){
+                end += 1;
+            }
 
-        // Deque stores the fishes swimming downstreams (B[i]==1) 
-        Deque<Integer> downstreams = new ArrayDeque<Integer>();
-
-        for(int i = 0; i < A.length; i++){
-
-            //Fish is going downstreams
-            if(B[i] == 1){
-                // push the fish into the Deque
-                downstreams.push(A[i]); 
-            }//Fish is going upstreams
-            else{
-                while( !downstreams.isEmpty() ){ 
-                    // Downstream-fish is bigger 
-                    if( downstreams.peek() > A[i] ){
-                        //Upstream-fish gets eaten
-                        numFishes--;
-                        break;    
-                    }// Downstream-fish is smaller
-                    else if(downstreams.peek() < A[i]){
-                        //Downstream-fish gets eaten
-                        numFishes--;
-                        downstreams.pop();
-                    }
-                }
-            }  
-        }    
-        return numFishes;
+            if(open == end){
+                result = 1;
+            }else{
+                result = 0;
+            }
+        }
+        return result;
     }
 }
