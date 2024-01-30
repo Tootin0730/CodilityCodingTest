@@ -1,27 +1,27 @@
 class Solution {
-    public int solution(String S) {
-        int len = S.length();
-        int open = 0;
-        int end = 0;
-        int result = 0;
+    public int solution(String S) {    
+      int result = 0;    
+      char[] charArray=S.toCharArray();
+      char[] stack=new char[charArray.length];      
+      int stackSize=0;
 
-        if(len == 0){
-            result = 0;
-        }
-
-        for(int i = 0; i < len; i++){
-            if(S.charAt(i) == '('){
-                open += 1;
-            }else if (S.charAt(i) == ')'){
-                end += 1;
-            }
-
-            if(open == end){
-                result = 1;
-            }else{
-                result = 0;
-            }
-        }
-        return result;
-    }
+      for(int i=0;i<charArray.length;i++){
+          if(charArray[i]=='{' ||charArray[i]=='(' || charArray[i]=='['){                
+              stack[stackSize++]=charArray[i];                                
+          }else{
+              if(stackSize==0){
+               result=0;
+               break;
+              }
+              char ch=stack[--stackSize];   
+              if((charArray[i]=='}' && ch=='{') || (charArray[i]==']' && ch=='[') ||(charArray[i]==')' && ch=='(')){                     
+                  continue;
+              }else{
+                  result=0;
+                  break;
+              }                   
+          }
+      }
+      return stackSize==0?result:0;
+  }
 }
