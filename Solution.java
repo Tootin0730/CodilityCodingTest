@@ -1,27 +1,21 @@
-class Solution {
-    public int solution(String S) {    
-      int result = 0;    
-      char[] charArray=S.toCharArray();
-      char[] stack=new char[charArray.length];      
-      int stackSize=0;
+import java.util.ArrayList;
 
-      for(int i=0;i<charArray.length;i++){
-          if(charArray[i]=='{' ||charArray[i]=='(' || charArray[i]=='['){                
-              stack[stackSize++]=charArray[i];                                
-          }else{
-              if(stackSize==0){
-               result=0;
-               break;
-              }
-              char ch=stack[--stackSize];   
-              if((charArray[i]=='}' && ch=='{') || (charArray[i]==']' && ch=='[') ||(charArray[i]==')' && ch=='(')){                     
-                  continue;
-              }else{
-                  result=0;
-                  break;
-              }                   
-          }
-      }
-      return stackSize==0?result:0;
-  }
+class Solution {
+    public int solution(int[] H) {
+
+        ArrayList<Integer> list = new ArrayList<>();
+        int before = 0;
+        int result = 0;
+
+        for(int i = 0; i < H.length; i++){
+            if(H[i] > before || H[i] < before){
+                list.add(H[i]);
+                before = H[i];
+            } else if(list.contains(H[i]) || H[i] == before){
+                list.remove(Integer.valueOf(H[i]));
+            }
+        }
+        result = list.size();
+        return result;
+    }
 }
