@@ -1,21 +1,17 @@
-import java.util.ArrayList;
+import java.util.Stack;
 
 class Solution {
     public int solution(int[] H) {
-
-        ArrayList<Integer> list = new ArrayList<>();
-        int before = 0;
-        int result = 0;
-
-        for(int i = 0; i < H.length; i++){
-            if(H[i] > before || H[i] < before){
-                list.add(H[i]);
-                before = H[i];
-            } else if(list.contains(H[i]) || H[i] == before){
-                list.remove(Integer.valueOf(H[i]));
+        Stack<Integer> blocks = new Stack<>();
+        int blockCounter = 0;
+        for (int i = 0; i < H.length; i++) {
+            while (!blocks.isEmpty() && blocks.peek() > H[i])
+                blocks.pop();
+            if (blocks.isEmpty() || blocks.peek() < H[i]) {
+                blockCounter++;
+                blocks.push(H[i]);
             }
         }
-        result = list.size();
-        return result;
+        return blockCounter;
     }
 }
