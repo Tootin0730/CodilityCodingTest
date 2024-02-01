@@ -1,17 +1,20 @@
-import java.util.Stack;
-
 class Solution {
-    public int solution(int[] H) {
-        Stack<Integer> blocks = new Stack<>();
-        int blockCounter = 0;
-        for (int i = 0; i < H.length; i++) {
-            while (!blocks.isEmpty() && blocks.peek() > H[i])
-                blocks.pop();
-            if (blocks.isEmpty() || blocks.peek() < H[i]) {
-                blockCounter++;
-                blocks.push(H[i]);
+    public int solution(int[] A) {
+        int max = 0;
+        
+        for(int i = 0; i < A.length; i++){
+            int candidate = 0;
+
+            for(int j = i+1; j < A.length; j++){
+                if(A[i] == A[j]){
+                    candidate += 1;
+                }
+            }
+            
+            if(candidate > max){
+                max = candidate;
             }
         }
-        return blockCounter;
+        return max;
     }
 }

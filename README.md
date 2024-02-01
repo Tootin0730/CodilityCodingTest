@@ -1,22 +1,23 @@
 # CodilityCodingTest
 
-You are going to build a stone wall. 
-The wall should be straight and N meters long, and its thickness should be constant; however, it should have different heights in different places. 
-The height of the wall is specified by an array H of N positive integers. 
-H[I] is the height of the wall from I to I+1 meters to the right of its left end. 
-In particular, H[0] is the height of the wall's left end and H[N−1] is the height of the wall's right end.
+An array A consisting of N integers is given. The dominator of array A is the value that occurs in more than half of the elements of A.
 
-The wall should be built of cuboid stone blocks (that is, all sides of such blocks are rectangular). Your task is to compute the minimum number of blocks needed to build the wall.
+For example, consider array A such that
 
-Write a function:
+ A[0] = 3    A[1] = 4    A[2] =  3
+ A[3] = 2    A[4] = 3    A[5] = -1
+ A[6] = 3    A[7] = 3
+The dominator of A is 3 because it occurs in 5 out of 8 elements of A (namely in those with indices 0, 2, 4, 6 and 7) and 5 is more than a half of 8.
 
-class Solution { public int solution(int[] H); }
+Write a function
 
-that, given an array H of N positive integers specifying the height of the wall, returns the minimum number of blocks needed to build it.
+class Solution { public int solution(int[] A); }
 
-For example, given array H containing N = 9 integers:
+that, given an array A consisting of N integers, returns index of any element of array A in which the dominator of A occurs. The function should return −1 if array A does not have a dominator.
 
-  H[0] = 8    H[1] = 8    H[2] = 5
-  H[3] = 7    H[4] = 9    H[5] = 8
-  H[6] = 7    H[7] = 4    H[8] = 8
-the function should return 7. The figure shows one possible arrangement of seven blocks.
+For example, given array A such that
+
+ A[0] = 3    A[1] = 4    A[2] =  3
+ A[3] = 2    A[4] = 3    A[5] = -1
+ A[6] = 3    A[7] = 3
+the function may return 0, 2, 4, 6 or 7, as explained above.
