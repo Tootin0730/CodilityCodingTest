@@ -1,30 +1,41 @@
-class Solution {
-    public int solution(int[] A) {
-        int n = A.length, size = 0, value = 0;
+import java.util.*;
 
-        for (int i = 0; i < n; i++){
-            if (size == 0) {
-                size++;
-                value = A[i];
+class Solution {
+    public int solution(int[] A) {                      
+        Map <Integer, Integer> map = new HashMap<>();
+        int N = A.length;
+        for(int i=0; i<N; i++) {
+            if(map.containsKey(A[i])) {
+                map.put(A[i], map.get(A[i]) + 1);
             } else {
-                size += (value == A[i]) ? 1 : -1;
+                map.put(A[i], 1);
             }
         }
-
-        if (size <= 0){
-            return -1;
-        }
-
-        int leader = -1, counter = 0;
-        for (int i = 0; i < n; i++){
-            if (A[i] == value) {
-                counter++;
-                if (leader == -1){
-                    leader = i;
-                }
+        int max = 0;
+        int maxCount= 0;
+        for(Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            if(maxCount < entry.getValue()) {
+                maxCount = entry.getValue();
+                max = entry.getKey();
             }
         }
         
-        return (counter > n / 2) ? leader : -1;
+        if(maxCount <= N/2) {
+            return 0;
+        }
+    
+        int leaderCount = 0;
+        int equiCounter = 0; 
+        for(int S=0; S<N-1; S++) {
+            if(A[S] == max) {
+                leaderCount++;
+            }
+            if((leaderCount>((S+1)/2)) && ((maxCount - leaderCount) > (N - (S+1))/2)) {
+                equiCounter++;
+            }
+        }
+        
+        return equiCounter;
+
     }
 }
