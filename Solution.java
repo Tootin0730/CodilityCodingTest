@@ -1,41 +1,32 @@
-import java.util.*;
-
 class Solution {
-    public int solution(int[] A) {                      
-        Map <Integer, Integer> map = new HashMap<>();
-        int N = A.length;
-        for(int i=0; i<N; i++) {
-            if(map.containsKey(A[i])) {
-                map.put(A[i], map.get(A[i]) + 1);
-            } else {
-                map.put(A[i], 1);
-            }
-        }
-        int max = 0;
-        int maxCount= 0;
-        for(Map.Entry<Integer, Integer> entry : map.entrySet()) {
-            if(maxCount < entry.getValue()) {
-                maxCount = entry.getValue();
-                max = entry.getKey();
-            }
-        }
-        
-        if(maxCount <= N/2) {
-            return 0;
-        }
-    
-        int leaderCount = 0;
-        int equiCounter = 0; 
-        for(int S=0; S<N-1; S++) {
-            if(A[S] == max) {
-                leaderCount++;
-            }
-            if((leaderCount>((S+1)/2)) && ((maxCount - leaderCount) > (N - (S+1))/2)) {
-                equiCounter++;
-            }
-        }
-        
-        return equiCounter;
 
+    public int solution(int[] A) {
+        int size = 0, n = A.length, value = 0;
+        for (int i = 0; i < n; i++)
+            if (size == 0) {
+                size++;
+                value = A[i];
+            } else
+				size += (A[i] == value) ? 1 : -1;
+        if (size <= 0)
+            return 0;
+        int counter = 0, leader = 0;
+        for (int i = 0; i < n; i++)
+            if (A[i] == value)
+                counter++;
+        if (n - counter >= counter)
+            return 0;
+		else
+			leader = value;
+
+		int leaderInLeftPart = 0, result = 0;
+        for (int i = 0; i < n; i++) {
+            if (A[i] == leader)
+                leaderInLeftPart++;
+            int leaderInRightPart = counter - leaderInLeftPart;
+            if (leaderInLeftPart > (i+1)/2 && leaderInRightPart > (n-i-1)/2)
+                result++;
+        }
+        return result;
     }
 }

@@ -1,37 +1,29 @@
 # CodilityCodingTest
 
-A non-empty array A consisting of N integers is given.
+An array A consisting of N integers is given. It contains daily prices of a stock share for a period of N consecutive days. If a single share was bought on day P and sold on day Q, where 0 ≤ P ≤ Q < N, then the profit of such transaction is equal to A[Q] − A[P], provided that A[Q] ≥ A[P]. Otherwise, the transaction brings loss of A[P] − A[Q].
 
-The leader of this array is the value that occurs in more than half of the elements of A.
+For example, consider the following array A consisting of six elements such that:
 
-An equi leader is an index S such that 0 ≤ S < N − 1 and two sequences A[0], A[1], ..., A[S] and A[S + 1], A[S + 2], ..., A[N − 1] have leaders of the same value.
+  A[0] = 23171
+  A[1] = 21011
+  A[2] = 21123
+  A[3] = 21366
+  A[4] = 21013
+  A[5] = 21367
+If a share was bought on day 0 and sold on day 2, a loss of 2048 would occur because A[2] − A[0] = 21123 − 23171 = −2048. If a share was bought on day 4 and sold on day 5, a profit of 354 would occur because A[5] − A[4] = 21367 − 21013 = 354. Maximum possible profit was 356. It would occur if a share was bought on day 1 and sold on day 5.
 
-For example, given array A such that:
-
-    A[0] = 4
-    A[1] = 3
-    A[2] = 4
-    A[3] = 4
-    A[4] = 4
-    A[5] = 2
-we can find two equi leaders:
-
-0, because sequences: (4) and (3, 4, 4, 4, 2) have the same leader, whose value is 4.
-2, because sequences: (4, 3, 4) and (4, 4, 2) have the same leader, whose value is 4.
-The goal is to count the number of equi leaders.
-
-Write a function:
+Write a function,
 
 class Solution { public int solution(int[] A); }
 
-that, given a non-empty array A consisting of N integers, returns the number of equi leaders.
+that, given an array A consisting of N integers containing daily prices of a stock share for a period of N consecutive days, returns the maximum possible profit from one transaction during this period. The function should return 0 if it was impossible to gain any profit.
 
-For example, given:
+For example, given array A consisting of six elements such that:
 
-    A[0] = 4
-    A[1] = 3
-    A[2] = 4
-    A[3] = 4
-    A[4] = 4
-    A[5] = 2
-the function should return 2, as explained above.
+  A[0] = 23171
+  A[1] = 21011
+  A[2] = 21123
+  A[3] = 21366
+  A[4] = 21013
+  A[5] = 21367
+the function should return 356, as explained above.
