@@ -1,19 +1,11 @@
 class Solution {
     public int solution(int[] A) {
-        int max = 0;
-
-        for(int i = 0; i < A.length; i++){
-            for(int j = i; j <A.length; j++){
-                int candidate = 0;
-                for(int num = i; num < j; num++){
-                    candidate += A[num];
-                }
-
-                if(candidate > max){
-                    max = candidate;
-                }
-            }
+        int currentSum = Integer.MIN_VALUE + 1000001;
+        int maxSum = Integer.MIN_VALUE + 1000001;
+        for (int a : A) {
+            currentSum = Math.max(currentSum + a, a);
+            maxSum = Math.max(maxSum, currentSum);
         }
-        return max;
+        return maxSum;
     }
 }
