@@ -1,14 +1,11 @@
 class Solution {
     public int solution(int N) {
-
-        int total = 0;
-
-        for(int D = 1; D <= N; D++){
-            if(N % D == 0){
-                total += 1;
-            }
-        }
-
-        return total;
+        int sqrtN = (int)Math.sqrt(N);
+        if (sqrtN * sqrtN == N)
+            return sqrtN * 4;
+        int i = sqrtN;
+        while (N % i != 0)
+            i--;
+        return (i + (N / i) ) * 2;
     }
 }
