@@ -1,21 +1,56 @@
 # CodilityCodingTest
 
-An integer N is given, representing the area of some rectangle.
+A non-empty array A consisting of N integers is given.
 
-The area of a rectangle whose sides are of length A and B is A * B, and the perimeter is 2 * (A + B).
+A peak is an array element which is larger than its neighbours. More precisely, it is an index P such that 0 < P < N − 1 and A[P − 1] < A[P] > A[P + 1].
 
-The goal is to find the minimal perimeter of any rectangle whose area equals N. The sides of this rectangle should be only integers.
+For example, the following array A:
 
-For example, given integer N = 30, rectangles of area 30 are:
+    A[0] = 1
+    A[1] = 5
+    A[2] = 3
+    A[3] = 4
+    A[4] = 3
+    A[5] = 4
+    A[6] = 1
+    A[7] = 2
+    A[8] = 3
+    A[9] = 4
+    A[10] = 6
+    A[11] = 2
+has exactly four peaks: elements 1, 3, 5 and 10.
 
-(1, 30), with a perimeter of 62,
-(2, 15), with a perimeter of 34,
-(3, 10), with a perimeter of 26,
-(5, 6), with a perimeter of 22.
+You are going on a trip to a range of mountains whose relative heights are represented by array A, as shown in a figure below. You have to choose how many flags you should take with you. The goal is to set the maximum number of flags on the peaks, according to certain rules.
+
+
+
+Flags can only be set on peaks. What's more, if you take K flags, then the distance between any two flags should be greater than or equal to K. The distance between indices P and Q is the absolute value |P − Q|.
+
+For example, given the mountain range represented by array A, above, with N = 12, if you take:
+
+two flags, you can set them on peaks 1 and 5;
+three flags, you can set them on peaks 1, 5 and 10;
+four flags, you can set only three flags, on peaks 1, 5 and 10.
+You can therefore set a maximum of three flags in this case.
+
 Write a function:
 
-class Solution { public int solution(int N); }
+class Solution { public int solution(int[] A); }
 
-that, given an integer N, returns the minimal perimeter of any rectangle whose area is exactly equal to N.
+that, given a non-empty array A of N integers, returns the maximum number of flags that can be set on the peaks of the array.
 
-For example, given an integer N = 30, the function should return 22, as explained above.
+For example, the following array A:
+
+    A[0] = 1
+    A[1] = 5
+    A[2] = 3
+    A[3] = 4
+    A[4] = 3
+    A[5] = 4
+    A[6] = 1
+    A[7] = 2
+    A[8] = 3
+    A[9] = 4
+    A[10] = 6
+    A[11] = 2
+the function should return 3, as explained above.
