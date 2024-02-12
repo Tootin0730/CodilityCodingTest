@@ -1,49 +1,13 @@
-import java.util.Arrays;
-
 class Solution {
     public int solution(int[] A) {
-        int n = A.length, peaksCount = 0;
-        if (n < 3){
-            return 0;
-        }
 
-        int[] peaks = new int[n];
-        for (int i = 1; i < n-1; i++){
-            if (A[i] > A[i-1] && A[i] > A[i+1]) {
-                peaks[peaksCount] = i;
-                peaksCount++;
-            }
-        
-            if (peaksCount == 0){
-                return 0;
+        int N = A.length;
+        int sum = 0;
+        for(int i = 1; i < N-1; i++){
+            if(A[i] > A[i-1] && A[i] > A[i+1]){
+                sum += 1;
             }
         }
-
-        peaks = Arrays.copyOfRange(peaks, 0, peaksCount);
-        for (int sliceSize = 1; sliceSize < n; sliceSize++) {
-            if (n % sliceSize != 0){
-                continue;
-            }
-
-            int slices = n / sliceSize;
-            boolean containsPeaks = true;
-            int peakFound = 0;
-            for (int peak : peaks){
-                if (peak / sliceSize >  peakFound) {
-                    containsPeaks = false;
-                    break;
-                } else if (peak / sliceSize ==  peakFound){
-                    peakFound++;
-                }
-            }
-
-            if (peakFound != slices){
-                containsPeaks = false;
-            }
-            if (containsPeaks){
-                return slices;
-            }
-        }
-        return 1;
+        return sum;
     }
 }
