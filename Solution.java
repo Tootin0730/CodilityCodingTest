@@ -1,93 +1,39 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-public class Solution
-{
-    public static void main(String[] args)
-    {
-        int A[] = new int[5];
-        A[0] = 3;
-        A[1] = 1;
-        A[2] = 2;
-        A[3] = 3;
-        A[4] = 6;
-
-        Solution s = new Solution();
-        int B[] = s.solution(A);
-        System.out.println("Input  : "+Arrays.toString(A));
-        System.out.println("Result : "+Arrays.toString(B));
-    }
-
-    public int[] solution(int[] A)
-    {
-        Set<Integer> setA = asSet(A);
-        List<Set<Integer>> divisors = computeDivisors(A.length * 2);
-        int occurrences[] = computeOccurrences(A);
-        int nonDivisors[] = new int[A.length];
-        for (int i=0; i<A.length; i++)
-        {
-            int value = A[i];
-            Set<Integer> d = divisors.get(value);
-            int totalOccurances = 0;
-            for (Integer divisor : d)
-            {
-                if (setA.contains(divisor))
-                {
-                    totalOccurances += occurrences[divisor];
+class Solution {
+    public int[] solution(int N, int[] P, int[] Q) {
+        int[] F = new int[N+1];
+        int f = 2;
+        while (f * f <= N) {
+            if (F[f] == 0) {
+                int K = f * f;
+                while (K <= N) {
+                    if (F[K] == 0) {
+                        F[K] = f;
+                    }
+                    K += f;
                 }
             }
-            nonDivisors[i] = A.length-totalOccurances;
+            f += 1;
         }
-        return nonDivisors;
-    }
 
-    private static Set<Integer> asSet(int A[])
-    {
-        Set<Integer> result = new HashSet<Integer>();
-        for (int value : A)
-        {
-            result.add(value);
-        }
-        return result;
-    }
-
-    private static List<Set<Integer>> computeDivisors(int maxValue)
-    {
-        List<Boolean> prime = new ArrayList<Boolean>();
-        prime.addAll(Collections.nCopies(maxValue+1, Boolean.TRUE));
-        List<Set<Integer>> divisors = new ArrayList<Set<Integer>>();
-        for (int i = 0; i < maxValue + 1; i++)
-        {
-            Set<Integer> d = new HashSet<Integer>();
-            d.add(1);
-            d.add(i);
-            divisors.add(d);
-        }
-        for (int i = 2; i <= maxValue; i++)
-        {
-            int next = i + i;
-            while (next <= maxValue)
-            {
-                divisors.get(next).addAll(divisors.get(i));
-                prime.set(next, Boolean.FALSE);
-                next += i;
+        int M = P.length;
+        int[] isSemiprime = new int[N + 1];
+        for (int i = 0; i < M; i++) {
+            int start = P[i], end = Q[i];
+            P[i] = 0;
+            for (int j = start; j <= end; j++) {
+                if (isSemiprime[j] == 0){       
+                    isSemiprime[j] = -1;        
+                    if (F[j] > 0) {
+                        int x = j / F[j];
+                        if (F[j / F[j]] == 0) {
+                            isSemiprime[j] = 1;
+                        }
+                    }
+                }
+                P[i] += isSemiprime[j] > 0 ? 1 : 0;
             }
         }
-        return divisors;
-    }
 
-    private static int[] computeOccurrences(int A[])
-    {
-        int occurances[] = new int[A.length * 2 + 1];
-        for (int i=0; i<A.length; i++)
-        {
-            int value = A[i];
-            occurances[value]++;
-        }
-        return occurances;
+        return P;
     }
 }
