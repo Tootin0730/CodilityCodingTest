@@ -1,23 +1,26 @@
-import java.util.*;
-
 class Solution {
-    public int solution(int N, int M) {
-
-        int answer =1;
-        HashMap<Integer , Integer> som = new HashMap<>();
-        boolean check = true;
-        int x =0;
-        som.put(0,0);
-        while(check){
-        int  m = (x+ M) % N ;
-            x = m;
-            if(som.containsKey(x)){
-            check = false;
-            }else{
-                som.put(x,0);
-                answer++;
+    public int solution(int[] A, int[] B) {
+        int totalA = 0;
+        int totalB = 0;
+        int total = 0;
+        for(int i = 0; i < A.length; i++){
+            for (int divisorA = 2; divisorA < A.length; divisorA++){
+                if(A[i] % divisorA == 0){
+                    totalA += divisorA;
+                }
+            }
+            
+            for (int divisorB = 2; divisorB < A.length; divisorB++){
+                if(B[i] % divisorB == 0){
+                    totalB += divisorB;
+                }
             }
         }
-        return answer;
+
+        if(totalA == totalB){
+            total += 1;
+        }
+
+        return total;
     }
 }
