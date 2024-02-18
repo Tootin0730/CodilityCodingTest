@@ -1,26 +1,29 @@
 class Solution {
     public int solution(int[] A, int[] B) {
-        int totalA = 0;
-        int totalB = 0;
-        int total = 0;
-        for(int i = 0; i < A.length; i++){
-            for (int divisorA = 2; divisorA < A.length; divisorA++){
-                if(A[i] % divisorA == 0){
-                    totalA += divisorA;
-                }
+        int result = 0;
+        for (int i = 0; i < A.length; i++) {
+            if (A[i] == B[i]) {
+                result +=1;
+                continue;
             }
-            
-            for (int divisorB = 2; divisorB < A.length; divisorB++){
-                if(B[i] % divisorB == 0){
-                    totalB += divisorB;
-                }
-            }
+            if (compute(A[i], B[i]) && compute(B[i], A[i])) result += 1;
         }
 
-        if(totalA == totalB){
-            total += 1;
-        }
+        return result;
+    }
+    private boolean compute(int a, int b) {
+        if (b%a == 0) return true;
+        int gcd = gcdBinary(a, b, 1);
+        if (gcd == 1) return false;
+        return compute(a/gcd, b);
+    }
 
-        return total;
+    private int gcdBinary(int a, int b, int res) {
+        if (a == b) return res * a;
+        else if (a % 2 == 0 && b % 2 == 0) return gcdBinary(a >> 1, b >> 1, 2 * res);
+        else if (a % 2 == 0) return gcdBinary(a >> 1, b, res);
+        else if (b % 2 == 0) return gcdBinary(a, b >> 1, res);
+        else if (a > b) return gcdBinary(a - b, b, res);
+        else return gcdBinary(a, b - a, res);
     }
 }
