@@ -1,12 +1,16 @@
 class Solution {
-    public int solution(int[] A) {
-
+    public int solution(int M, int[] A) {
         int total = 0;
         for(int i = 0; i < A.length; i++){
-            total += 1;
-            for(int j = i+1; j < A.length; j++){
-                if(A[i] == 0-A[j]){
-                    total -= 1;
+            for(int j = i; j < A.length; j++){
+                if(j == 0){
+                    total += 1;
+                }else if(A[j] != A[j-1]){
+                    total += 1;
+                }else if(i == j){
+                    total += 1;
+                }else{
+                    break;
                 }
             }
         }
