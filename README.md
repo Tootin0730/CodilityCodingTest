@@ -1,33 +1,24 @@
 # CodilityCodingTest
 
-An integer M and a non-empty array A consisting of N non-negative integers are given. All integers in array A are less than or equal to M.
+An array A consisting of N integers is given. A triplet (P, Q, R) is triangular if it is possible to build a triangle with sides of lengths A[P], A[Q] and A[R]. In other words, triplet (P, Q, R) is triangular if 0 ≤ P < Q < R < N and:
 
-A pair of integers (P, Q), such that 0 ≤ P ≤ Q < N, is called a slice of array A. The slice consists of the elements A[P], A[P + 1], ..., A[Q]. A distinct slice is a slice consisting of only unique numbers. That is, no individual number occurs more than once in the slice.
+A[P] + A[Q] > A[R],
+A[Q] + A[R] > A[P],
+A[R] + A[P] > A[Q].
+For example, consider array A such that:
 
-For example, consider integer M = 6 and array A such that:
-
-    A[0] = 3
-    A[1] = 4
-    A[2] = 5
-    A[3] = 5
-    A[4] = 2
-There are exactly nine distinct slices: (0, 0), (0, 1), (0, 2), (1, 1), (1, 2), (2, 2), (3, 3), (3, 4) and (4, 4).
-
-The goal is to calculate the number of distinct slices.
+  A[0] = 10    A[1] = 2    A[2] = 5
+  A[3] = 1     A[4] = 8    A[5] = 12
+There are four triangular triplets that can be constructed from elements of this array, namely (0, 2, 4), (0, 2, 5), (0, 4, 5), and (2, 4, 5).
 
 Write a function:
 
-class Solution { public int solution(int M, int[] A); }
+class Solution { public int solution(int[] A); }
 
-that, given an integer M and a non-empty array A consisting of N integers, returns the number of distinct slices.
+that, given an array A consisting of N integers, returns the number of triangular triplets in this array.
 
-If the number of distinct slices is greater than 1,000,000,000, the function should return 1,000,000,000.
+For example, given array A such that:
 
-For example, given integer M = 6 and array A such that:
-
-    A[0] = 3
-    A[1] = 4
-    A[2] = 5
-    A[3] = 5
-    A[4] = 2
-the function should return 9, as explained above.
+  A[0] = 10    A[1] = 2    A[2] = 5
+  A[3] = 1     A[4] = 8    A[5] = 12
+the function should return 4, as explained above.

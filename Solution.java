@@ -1,25 +1,17 @@
 class Solution {
-    public int solution(int M, int[] A) {
+    public int solution(int[] A) {
 
-        boolean[] seen = new boolean[M+1];
+        int total = 0;
 
-        int p = 0;
-        int q = 0;
-        int count = 0;
-
-        while (p < A.length && q < A.length) {
-            if (seen[A[q]] == true) {
-                seen[A[p]] = false;
-                p++;
+        for(int i = 0; i < A.length; i++){
+            for(int j = i+1; j < A.length; j++){
+                for(int k = j+1; k < A.length; k++){
+                    if(A[i] < A[j] + A[k] && A[j] < A[i] + A[k] && A[k] < A[i] + A[j]){
+                        total += 1;
+                    }
+                }
             }
-            else {
-                seen[A[q]] = true;
-                count += (q - p + 1); 
-                q++;
-            }
-            if (count > 1000_000_000) return 1000_000_000;
-
         }
-        return count;
+        return total;
     }
 }
