@@ -1,17 +1,23 @@
+import java.util.Arrays;
+
 class Solution {
     public int solution(int[] A) {
+        int N = A.length;
 
-        int total = 0;
+        if (N < 3)
+            return 0;
 
-        for(int i = 0; i < A.length; i++){
-            for(int j = i+1; j < A.length; j++){
-                for(int k = j+1; k < A.length; k++){
-                    if(A[i] < A[j] + A[k] && A[j] < A[i] + A[k] && A[k] < A[i] + A[j]){
-                        total += 1;
-                    }
-                }
+        Arrays.sort(A);
+        int result = 0;
+        
+        for (int i = 0; i < N; i++) {
+            int k = i + 1;
+            for (int j = i + 1; j < N; j++) {
+                while (k < N && A[i] + A[j] > A[k])
+                    k++;
+                result += k - j - 1;
             }
         }
-        return total;
+        return result;
     }
 }
