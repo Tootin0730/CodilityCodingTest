@@ -1,23 +1,28 @@
-import java.util.Arrays;
-
 class Solution {
     public int solution(int[] A) {
-        int N = A.length;
-
-        if (N < 3)
-            return 0;
-
-        Arrays.sort(A);
-        int result = 0;
         
-        for (int i = 0; i < N; i++) {
-            int k = i + 1;
-            for (int j = i + 1; j < N; j++) {
-                while (k < N && A[i] + A[j] > A[k])
-                    k++;
-                result += k - j - 1;
+        int pairNum= 0;
+        for(int n = A.length+1; n > 0; n--){
+            pairNum += n-1;
+        }
+
+        int pair;
+        int min = 0;
+        for(int i = 0; i < A.length; i++){
+            for(int j = i; j < A.length; j++){
+
+                pair = A[i] + A[j];
+                if(pair < 0){
+                    pair = -pair;
+                }
+
+                if(min == 0){
+                    min = pair;
+                } else {
+                    min = Math.min(pair, min);
+                }
             }
         }
-        return result;
+        return min;
     }
 }
