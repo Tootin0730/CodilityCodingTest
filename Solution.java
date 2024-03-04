@@ -1,26 +1,39 @@
+import java.util.*;
+
 class Solution {
     public int solution(int[] A) {
+        Arrays.sort(A);
+        int low = 0;
+        int high = A.length - 1;
+
+        if (A[0] >= 0) {
+            return 2 * A[0];
+        }
         
-        int pairNum= 0;
-        for(int n = A.length+1; n > 0; n--){
-            pairNum += n-1;
+        if (A[high] <= 0) {
+            return -2 * A[high];
         }
 
-        int pair;
-        int min = 0;
-        for(int i = 0; i < A.length; i++){
-            for(int j = i; j < A.length; j++){
+        int min = Integer.MAX_VALUE;
+        int i = 0, j = 0;
+        int sum = 0;
 
-                pair = A[i] + A[j];
-                if(pair < 0){
-                    pair = -pair;
-                }
+        while (low < high){
+            sum = A[high] + A[low];
+            if (Math.abs(sum) < min){
+                min = Math.abs(sum);
+                i = low;
+                j = high;
+            }
+ 
+            if (min == 0) {
+                break;
+            }
 
-                if(min == 0){
-                    min = pair;
-                } else {
-                    min = Math.min(pair, min);
-                }
+            if (sum < 0) {
+                low++;
+            } else {
+                high--;
             }
         }
         return min;
