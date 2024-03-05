@@ -1,13 +1,23 @@
 class Solution {
     public int solution(int[] A, int[] B) {
-        int num = 1;
-        for(int i = 0; i < A.length-1; i++){
-            if(A[i+1] < A[i] ||  B[i] < A[i+1]){
-                if(B[i+1] < A[i+2] || A[i] < B[i+1]){
-                    num += 1;
-                }
+
+        if(A.length==0){
+            return 0;
+        }
+        
+        int N = A.length;
+        int currentLeftEnd = A[N-1];
+        int numNonOverlap =1;
+        
+        for(int i=N-2; i >=0; i--){
+            if(B[i] < currentLeftEnd){
+                numNonOverlap++;
+                currentLeftEnd = A[i];
+            }
+            if(A[i] > currentLeftEnd){
+                currentLeftEnd = A[i];
             }
         }
-        return num;
+        return numNonOverlap;
     }
 }
