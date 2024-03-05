@@ -1,41 +1,13 @@
-import java.util.*;
-
 class Solution {
-    public int solution(int[] A) {
-        Arrays.sort(A);
-        int low = 0;
-        int high = A.length - 1;
-
-        if (A[0] >= 0) {
-            return 2 * A[0];
-        }
-        
-        if (A[high] <= 0) {
-            return -2 * A[high];
-        }
-
-        int min = Integer.MAX_VALUE;
-        int i = 0, j = 0;
-        int sum = 0;
-
-        while (low < high){
-            sum = A[high] + A[low];
-            if (Math.abs(sum) < min){
-                min = Math.abs(sum);
-                i = low;
-                j = high;
-            }
- 
-            if (min == 0) {
-                break;
-            }
-
-            if (sum < 0) {
-                low++;
-            } else {
-                high--;
+    public int solution(int[] A, int[] B) {
+        int num = 1;
+        for(int i = 0; i < A.length-1; i++){
+            if(A[i+1] < A[i] ||  B[i] < A[i+1]){
+                if(B[i+1] < A[i+2] || A[i] < B[i+1]){
+                    num += 1;
+                }
             }
         }
-        return min;
+        return num;
     }
 }
